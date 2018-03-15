@@ -1,0 +1,9 @@
+.searchFileButton {
+    background-image: url('../images/folder-saved-search.png');
+    border: groove;
+}
+
+.profileButton {
+    background-image: url('../images/cheese.png');
+    border: groove;
+}

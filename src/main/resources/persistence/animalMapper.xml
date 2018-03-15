@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="main.project.model.persistence.AnimalMapper">
+
+    <resultMap id="animalResultMap" type="Animal">
+        <id column="animal_id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+    </resultMap>
+
+    <select id="getAnimals" resultMap="animalResultMap">
+        SELECT
+            animal_id,
+            animal_name,
+            description
+        FROM animals
+    </select>
+    <select id="getAnimalById" resultType="Animal" parameterType="long">
+        SELECT
+            animal_id,
+            animal_name,
+            description
+        FROM animals
+        WHERE animal_id = #{id}
+    </select>
+    <insert id="addAnimal" parameterType="Animal">
+        INSERT INTO animals (animal_name, description)
+        VALUES (#{name}, #{description})
+    </insert>
+    <update id="updateAnimal" parameterType="Animal">
+        UPDATE pets
+        SET
+            pet_name        = #{name},
+            description = #{description}
+        WHERE animal_id = #{id}
+    </update>
+    <delete id="removeAnimalById" parameterType="long">
+        DELETE FROM animals
+        WHERE animal_id = #{id}
+    </delete>
+</mapper>

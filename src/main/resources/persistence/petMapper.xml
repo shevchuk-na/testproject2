@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="main.project.model.persistence.PetMapper">
+
+    <resultMap id="petResultMap" type="Pet">
+        <id column="pet_id" property="id"/>
+        <result column="pet_name" property="name"/>
+        <result column="weight" property="weight"/>
+        <result column="adopted" property="adopted"/>
+        <association column="animal_id" property="animal" javaType="Animal">
+            <id column="animal_id" property="id"/>
+            <result column="animal_name" property="name"/>
+            <result column="description" property="description"/>
+        </association>
+    </resultMap>
+
+    <select id="getPets" resultMap="petResultMap">
+        SELECT * FROM pets INNER JOIN animals a ON pets.animal_id = a.animal_id
+    </select>
+
+    <select id="getPetById" resultType="Pet" parameterType="long">
+        SELECT
+            pet_id,
+            pet_name,
+            animal_id,
+            weight,
+            adopted
+        FROM pets
+        WHERE pet_id = #{id}
+    </select>
+    <insert id="addPet" parameterType="Pet">
+        INSERT INTO pets (pet_name, animal_id, weight, adopted)
+        VALUES (#{name}, #{animal.id}, #{weight}, #{adopted})
+    </insert>
+    <update id="updatePet" parameterType="Pet">
+        UPDATE pets
+        SET
+            pet_name      = #{name},
+            animal_id = #{animal.id},
+            weight    = #{weight},
+            adopted   = #{adopted}
+        WHERE pet_id = #{id}
+    </update>
+    <delete id="removePetById" parameterType="long">
+        DELETE FROM pets
+        WHERE pet_id = #{id}
+    </delete>
+</mapper>
