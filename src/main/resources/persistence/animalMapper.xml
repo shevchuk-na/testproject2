@@ -2,11 +2,11 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="main.project.model.persistence.AnimalMapper">
+<mapper namespace="project.model.persistence.AnimalMapper">
 
     <resultMap id="animalResultMap" type="Animal">
         <id column="animal_id" property="id"/>
-        <result column="name" property="name"/>
+        <result column="animal_name" property="name"/>
         <result column="description" property="description"/>
     </resultMap>
 
@@ -17,10 +17,10 @@
             description
         FROM animals
     </select>
-    <select id="getAnimalById" resultType="Animal" parameterType="long">
+    <select id="getAnimalById" resultType="Animal">
         SELECT
-            animal_id,
-            animal_name,
+        animal_id AS id,
+        animal_name as name,
             description
         FROM animals
         WHERE animal_id = #{id}
