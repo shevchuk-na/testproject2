@@ -96,12 +96,6 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>default-jar</id>
-                        <phase>none</phase>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

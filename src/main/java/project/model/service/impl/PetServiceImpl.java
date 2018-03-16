@@ -23,16 +23,21 @@ public class PetServiceImpl implements PetService{
     private final AnimalService animalService;
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final TypeReference<List<Pet>> petTypeReference;
+    private final TypeReference<List<Long>> longTypeReference;
 
     @Autowired
     public PetServiceImpl(PetMapper petMapper, AnimalService animalService) {
         this.petMapper = petMapper;
         this.animalService = animalService;
+
         SimpleModule module = new SimpleModule();
         module.addDeserializer(Pet.class, PetDeserializer.getInstance());
         objectMapper.registerModule(module);
         objectMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+
         petTypeReference = new TypeReference<List<Pet>>() {
+        };
+        longTypeReference = new TypeReference<List<Long>>() {
         };
     }
 
@@ -73,8 +78,7 @@ public class PetServiceImpl implements PetService{
     @Override
     public boolean removePets(String data) {
         try {
-            List<Long> petIds = objectMapper.readValue(data, new TypeReference<List<Long>>() {
-            });
+            List<Long> petIds = objectMapper.readValue(data, longTypeReference);
             return petMapper.removePetsById(petIds);
         } catch (IOException e) {
             return false;
