@@ -17,27 +17,12 @@
             description
         FROM animals
     </select>
-    <select id="getAnimalById" resultType="Animal">
+    <select id="getAnimalByName" resultType="Animal">
         SELECT
         animal_id AS id,
         animal_name as name,
             description
         FROM animals
-        WHERE animal_id = #{id}
+        WHERE animal_name = #{name}
     </select>
-    <insert id="addAnimal" parameterType="Animal">
-        INSERT INTO animals (animal_name, description)
-        VALUES (#{name}, #{description})
-    </insert>
-    <update id="updateAnimal" parameterType="Animal">
-        UPDATE pets
-        SET
-            pet_name        = #{name},
-            description = #{description}
-        WHERE animal_id = #{id}
-    </update>
-    <delete id="removeAnimalById" parameterType="long">
-        DELETE FROM animals
-        WHERE animal_id = #{id}
-    </delete>
 </mapper>

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import project.model.entity.Animal;
 import project.model.entity.Pet;
 import project.model.entity.deserializers.PetDeserializer;
 import project.model.persistence.PetMapper;
@@ -59,6 +60,10 @@ public class PetServiceImpl implements PetService{
     public boolean updatePets(String data) {
         try {
             List<Pet> pets = objectMapper.readValue(data, petTypeReference);
+            for (Pet pet : pets) {
+                Animal animal = animalService.getAnimalByName(pet.getAnimal().getName());
+                pet.setAnimal(animal);
+            }
             return petMapper.updatePets(pets);
         } catch (IOException e) {
             return false;

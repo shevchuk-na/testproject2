@@ -24,22 +24,7 @@ public class AnimalServiceImpl implements AnimalService {
     }
 
     @Override
-    public Animal getAnimalById(Long id) {
-        return animalMapper.getAnimalById(id);
-    }
-
-    @Override
-    public boolean addAnimal(Animal animal) {
-        return animalMapper.addAnimal(animal);
-    }
-
-    @Override
-    public Animal updateAnimal(Animal animal) {
-        return animalMapper.updateAnimal(animal);
-    }
-
-    @Override
-    public boolean removeAnimalById(Long id) {
-        return animalMapper.removeAnimalById(id);
+    public Animal getAnimalByName(String name) {
+        return animalMapper.getAnimalByName(name);
     }
 }

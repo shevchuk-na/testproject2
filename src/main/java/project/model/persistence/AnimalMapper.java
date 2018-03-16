@@ -8,11 +8,5 @@ public interface AnimalMapper {
 
     List<Animal> getAnimals();
 
-    Animal getAnimalById(Long id);
-
-    boolean addAnimal(Animal animal);
-
-    Animal updateAnimal(Animal animal);
-
-    boolean removeAnimalById(Long id);
+    Animal getAnimalByName(String name);
 }

@@ -1,7 +1,6 @@
 package project.model.entity.deserializers;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
@@ -14,11 +13,11 @@ public class PetDeserializer extends StdDeserializer<Pet> {
 
     private static PetDeserializer instance = new PetDeserializer();
 
-    public PetDeserializer() {
+    private PetDeserializer() {
         this(null);
     }
 
-    public PetDeserializer(Class<?> vc) {
+    private PetDeserializer(Class<?> vc) {
         super(vc);
     }
 
@@ -28,7 +27,7 @@ public class PetDeserializer extends StdDeserializer<Pet> {
 
     @Override
     public Pet deserialize(JsonParser jp, DeserializationContext ctxt)
-            throws IOException, JsonProcessingException {
+            throws IOException {
 
         JsonNode petNode = jp.getCodec().readTree(jp);
         Pet pet = new Pet();
